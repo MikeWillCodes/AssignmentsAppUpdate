@@ -28,7 +28,7 @@ public class Main {
         System.out.println("The five weeks, the date will be " + fiveWeeksLater);
 
         //Initialize a LocalDateTime object to your birthdate and the time 12:35 PM.
-        LocalDateTime birthDate = LocalDateTime.of(1999, 2, 7, 12, 35);
+        LocalDateTime birthDate = LocalDateTime.of(1996, 9, 11, 12, 35);
         System.out.println("Your birthdate is " + birthDate);
 
         //Output the day of the week (Sunday-Saturday) that you were born.
@@ -96,7 +96,6 @@ public class Main {
         //Output a date in the format "January 1st, 2018".
         System.out.print("\nWhat is the index of the date you want to be outputted in the format \"January 1st, 2018\"? ");
         System.out.println("The formatted date is " + formattedDate(hundredRandomDates.get(sc.nextInt())));
-        //I had completely forgotten to submit the previous story, so if it looks like I completed this story incredibly quickly, it's because I temporarily removed this code so I could post the for the previous story.
     }
 
     private static String formattedDate(LocalDateTime date) {
@@ -200,6 +199,20 @@ public class Main {
         }
         return earlyDate;
     }
+
+    public enum day {
+        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    }
+
+    public enum courses{
+        DATA_STRUCTURES, LINEAR_ALGEBRA, AFRICAN_AMERICAN_DISPORA_STUDIES, THEOLOGY, INTERCULTURAL_COMMUNICATIONS
+    }
+
+    public enum category{
+        QUIZZES, TEST, HOMEWORK, NOTES, PROJECT
+    }
+
+
 }
 
 
