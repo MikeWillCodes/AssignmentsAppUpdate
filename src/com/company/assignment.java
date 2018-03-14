@@ -4,28 +4,28 @@ import java.util.Random;
 
 public class assignment {
 
-    public String day;
-    public String courses;
-    public String category;
+    public Main.DaysOfTheWeek day;
+    public Main.CourseList courses;
+    public Main.Category category;
     public Integer priority;
 
 
-    public assignment(String day, String courses, String category, Integer priority) {
+    public assignment(Main.DaysOfTheWeek day, Main.CourseList courses, Main.Category category, Integer priority) {
         this.day = day;
         this.courses = courses;
         this.category = category;
         this.priority = priority;
     }
 
-    public String getDay() {
+    public Main.DaysOfTheWeek getDay() {
         return day;
     }
 
-    public String getCourses() {
+    public Main.CourseList getCourses() {
         return courses;
     }
 
-    public String getCategory() {
+    public Main.Category getCategory() {
         return category;
     }
 

@@ -9,8 +9,38 @@ import java.util.stream.Collectors;
 
 public class Main {
 
-        static Random rand = new Random();
-        static Scanner sc = new Scanner(System.in);
+    static Random random = new Random();
+    static Scanner sc = new Scanner(System.in);
+
+    public enum DaysOfTheWeek {
+        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
+
+        private static final List<DaysOfTheWeek> DAYS_OF_THE_WEEK_LIST = List.of(values());
+
+        public static DaysOfTheWeek getADay() {
+            return DAYS_OF_THE_WEEK_LIST.get(random.nextInt(DAYS_OF_THE_WEEK_LIST.size()));
+        }
+    }
+
+    public enum CourseList {
+        DATA_STRUCTURES, LINEAR_ALGEBRA, AFRICAN_AMERICAN_DISPORA_STUDIES, THEOLOGY, INTERCULTURAL_COMMUNICATIONS;
+
+        private static final List<CourseList> COURSE_LISTS = List.of(values());
+
+        public static CourseList getACourse() {
+            return COURSE_LISTS.get(random.nextInt(COURSE_LISTS.size()));
+        }
+    }
+
+    public enum Category {
+        QUIZZES, TEST, HOMEWORK, NOTES, PROJECT;
+        private static final List<Category> CATEGORY_LIST = List.of(values());
+
+        public static Category getACategory() {
+            return CATEGORY_LIST.get(random.nextInt(CATEGORY_LIST.size()));
+        }
+    }
+
 
     public static void main(String[] args) {
         System.out.println("\n\nHello, AssignmentsApp!\n");
@@ -71,7 +101,7 @@ public class Main {
         System.out.println("\nWithout using a Set, the number of duplicated dates are " + countDuplicates(hundredRandomDates));
 
         //Count the number of evening (after 6pm) dates.
-        ArrayList<LocalDateTime> eveningDates = searchDatesInTimeframe(hundredRandomDates,18, 24 );
+        ArrayList<LocalDateTime> eveningDates = searchDatesInTimeframe(hundredRandomDates, 18, 24);
         System.out.println("\nThe number of evening dates are " + eveningDates.size());
 
         //Count the number of dates in each of the individual 12 months without using a Java Map.
@@ -84,8 +114,8 @@ public class Main {
         }
 
         //Count the number of dates in each of the individual 12 months using a Java Map.
-        if (month >= 1 && month <=12){
-            System.out.println("Using a Java Map, the number of dates in month " + month + " is " + mapByMonthSearch(hundredRandomDates,month));
+        if (month >= 1 && month <= 12) {
+            System.out.println("Using a Java Map, the number of dates in month " + month + " is " + mapByMonthSearch(hundredRandomDates, month));
         }
 
         //Determine the index of the latest LocalDateTime.
@@ -99,14 +129,12 @@ public class Main {
         System.out.println("The formatted date is " + formattedDate(hundredRandomDates.get(sc.nextInt())));
 
         //Generate 2 random assignments
-        assignment assign1 = new assignment(formatter.format(LocalDateTime.now()),"MATH", "TEST", 3);
-        System.out.println(assign1);
-        assignment assign2 = new assignment(formatter.format(LocalDateTime.of(2018,1,1,1,1,1,1)), "" +
-                "English", "QUIZ", 2);
-        System.out.println(assign2);
+        assignment assign1 = new assignment(DaysOfTheWeek.getADay(), CourseList.getACourse(), Category.getACategory(), random.nextInt(4));
+        assignment assign2 = new assignment(DaysOfTheWeek.getADay(), CourseList.getACourse(), Category.getACategory(), random.nextInt(4));
+        System.out.println("The random assignments are: \n" + assign1 + "\n" + assign2);
 
         assignment assign3 = assign1;
-        System.out.println(assign3);
+        System.out.println("Copy of assignment 1" + assign3);
     }
 
     private static String formattedDate(LocalDateTime date) {
@@ -117,8 +145,8 @@ public class Main {
         return newDate;
     }
 
-    private static String intToOrdinal(int num){
-        String[] suffixes = new String[] {"th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th" };
+    private static String intToOrdinal(int num) {
+        String[] suffixes = new String[]{"th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"};
         //I probably should have made this into a switch/case.
         if (num % 100 == 11 || num % 100 == 12 || num % 100 == 13) {
             return num + "th";
@@ -127,9 +155,9 @@ public class Main {
         }
     }
 
-    private static Integer indexEarliestTime(ArrayList<LocalDateTime> dateList){
+    private static Integer indexEarliestTime(ArrayList<LocalDateTime> dateList) {
         LocalDateTime earliestDateTime = dateList.get(0);
-        for (LocalDateTime date: dateList) {
+        for (LocalDateTime date : dateList) {
             if (earliestDateTime.toLocalTime().isAfter(date.toLocalTime())) earliestDateTime = date;
         }
         return dateList.indexOf(earliestDateTime);
@@ -139,12 +167,12 @@ public class Main {
         return dateList.indexOf(Collections.max(dateList));
     }
 
-    private static Integer mapByMonthSearch (ArrayList<LocalDateTime> dateList, int month){
+    private static Integer mapByMonthSearch(ArrayList<LocalDateTime> dateList, int month) {
         return mapByMonth(dateList).get(month);
     }
 
     private static Map<Integer, Integer> mapByMonth(ArrayList<LocalDateTime> dateList) {
-        Map<Integer,Integer> returnMap = new HashMap<>();
+        Map<Integer, Integer> returnMap = new HashMap<>();
         for (LocalDateTime date : dateList) {
             Integer count = returnMap.get(date.getMonthValue());
             returnMap.put(date.getMonthValue(), (count == null) ? 1 : count + 1);
@@ -154,19 +182,19 @@ public class Main {
 
     private static ArrayList<LocalDateTime> searchByMonth(ArrayList<LocalDateTime> dateList, int month) {
         return (ArrayList) dateList.stream()
-                .filter( date -> date.getMonthValue() == month)
+                .filter(date -> date.getMonthValue() == month)
                 .collect(Collectors.toList());
     }
 
-    private static ArrayList searchDatesInTimeframe (ArrayList<LocalDateTime> dateList, int startHour, int endHour){
+    private static ArrayList searchDatesInTimeframe(ArrayList<LocalDateTime> dateList, int startHour, int endHour) {
         return (ArrayList) dateList.stream()
-                .filter( date -> date.getHour() >= startHour && date.getHour() < endHour)
+                .filter(date -> date.getHour() >= startHour && date.getHour() < endHour)
                 .collect(Collectors.toList());
     }
 
     private static int countDuplicates(ArrayList<LocalDateTime> hundredRandomDates) {
         int count = 0;
-        for (LocalDateTime date: hundredRandomDates) {
+        for (LocalDateTime date : hundredRandomDates) {
             if (Collections.frequency(hundredRandomDates, date) >= 2) count++;
         }
         return count;
@@ -185,11 +213,11 @@ public class Main {
 
     private static ArrayList<LocalDateTime> searchByYear(ArrayList<LocalDateTime> listOfLocalDateTimes, int year) {
         return (ArrayList) listOfLocalDateTimes.stream()
-                .filter( date -> date.getYear()==year)
+                .filter(date -> date.getYear() == year)
                 .collect(Collectors.toList());
     }
 
-    private static ArrayList<LocalDateTime> randomDateArray (int NumElements){
+    private static ArrayList<LocalDateTime> randomDateArray(int NumElements) {
         ArrayList<LocalDateTime> returnArray = new ArrayList<>();
         for (int i = 0; i < NumElements; i++) {
             returnArray.add(randomDateGenerator());
@@ -197,9 +225,9 @@ public class Main {
         return returnArray;
     }
 
-    private static LocalDateTime randomDateGenerator (){
-        long startOfTime = ChronoUnit.MINUTES.between(LocalDateTime.of(0,1,1,0,0),LocalDateTime.now());
-        long minutes = rand.nextInt((int) startOfTime);
+    private static LocalDateTime randomDateGenerator() {
+        long startOfTime = ChronoUnit.MINUTES.between(LocalDateTime.of(0, 1, 1, 0, 0), LocalDateTime.now());
+        long minutes = random.nextInt((int) startOfTime);
         return LocalDateTime.now().minusMinutes(minutes);
     }
 
@@ -210,20 +238,6 @@ public class Main {
         }
         return earlyDate;
     }
-
-    public enum day {
-        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    }
-
-    public enum courses{
-        DATA_STRUCTURES, LINEAR_ALGEBRA, AFRICAN_AMERICAN_DISPORA_STUDIES, THEOLOGY, INTERCULTURAL_COMMUNICATIONS
-    }
-
-    public enum category{
-        QUIZZES, TEST, HOMEWORK, NOTES, PROJECT
-    }
-
-
 }
 
 
