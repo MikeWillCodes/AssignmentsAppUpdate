@@ -1,5 +1,6 @@
 package com.company;
 
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -96,6 +97,13 @@ public class Main {
         //Output a date in the format "January 1st, 2018".
         System.out.print("\nWhat is the index of the date you want to be outputted in the format \"January 1st, 2018\"? ");
         System.out.println("The formatted date is " + formattedDate(hundredRandomDates.get(sc.nextInt())));
+
+        //Generate 2 random assignments
+        assignment assign1 = new assignment();
+        assignment assign2 = new assignment();
+
+
+
     }
 
     private static String formattedDate(LocalDateTime date) {
