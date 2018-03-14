@@ -11,28 +11,23 @@ public class assignment {
     public Integer priority;
 
 
-    public LocalDateTime getDay() {
-        return day;
+    public assignment(LocalDateTime day, String courses, String category, Integer priority) {
+        this.day = day;
+        this.courses = courses;
+        this.category = category;
+        this.priority = priority;
     }
 
-    public void setDay(LocalDateTime day) {
-        this.day = day;
+    public LocalDateTime getDay() {
+        return day;
     }
 
     public String getCourses() {
         return courses;
     }
 
-    public void setCourses(String courses) {
-        this.courses = courses;
-    }
-
     public String getCategory() {
         return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public Integer getPriority() {
@@ -40,11 +35,7 @@ public class assignment {
         priority = random.nextInt(3);
         return priority;
     }
-
-    public void setPriority(Integer priority) {
-        this.priority = priority;
-    }
-
+    
     @Override
     public String toString() {
         return "assignment{" +
