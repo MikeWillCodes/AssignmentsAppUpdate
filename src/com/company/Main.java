@@ -104,6 +104,9 @@ public class Main {
         assignment assign2 = new assignment(formatter.format(LocalDateTime.of(2018,1,1,1,1,1,1)), "" +
                 "English", "QUIZ", 2);
         System.out.println(assign2);
+
+        assignment assign3 = assign1;
+        System.out.println(assign3);
     }
 
     private static String formattedDate(LocalDateTime date) {
