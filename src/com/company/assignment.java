@@ -35,7 +35,7 @@ public class assignment {
         priority = random.nextInt(3);
         return priority;
     }
-    
+
     @Override
     public String toString() {
         return "assignment{" +
