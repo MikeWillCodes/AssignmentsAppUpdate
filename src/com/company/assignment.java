@@ -1,24 +1,23 @@
 package com.company;
 
-import java.time.LocalDateTime;
 import java.util.Random;
 
 public class assignment {
 
-    public LocalDateTime day;
+    public String day;
     public String courses;
     public String category;
     public Integer priority;
 
 
-    public assignment(LocalDateTime day, String courses, String category, Integer priority) {
+    public assignment(String day, String courses, String category, Integer priority) {
         this.day = day;
         this.courses = courses;
         this.category = category;
         this.priority = priority;
     }
 
-    public LocalDateTime getDay() {
+    public String getDay() {
         return day;
     }
 

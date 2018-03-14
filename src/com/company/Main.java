@@ -99,9 +99,9 @@ public class Main {
         System.out.println("The formatted date is " + formattedDate(hundredRandomDates.get(sc.nextInt())));
 
         //Generate 2 random assignments
-        assignment assign1 = new assignment(LocalDateTime.now(),"MATH", "TEST", 3);
+        assignment assign1 = new assignment(formatter.format(LocalDateTime.now()),"MATH", "TEST", 3);
         System.out.println(assign1);
-        assignment assign2 = new assignment(LocalDateTime.of(2018,1,1,1,1,1,1), "" +
+        assignment assign2 = new assignment(formatter.format(LocalDateTime.of(2018,1,1,1,1,1,1)), "" +
                 "English", "QUIZ", 2);
         System.out.println(assign2);
     }
