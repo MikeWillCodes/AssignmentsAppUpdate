@@ -100,7 +100,9 @@ public class Main {
 
         //Generate 2 random assignments
         assignment assign1 = new assignment();
+        System.out.println(assign1);
         assignment assign2 = new assignment();
+        System.out.println(assign2);
 
 
 
