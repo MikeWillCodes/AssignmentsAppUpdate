@@ -44,4 +44,21 @@ public class assignment {
                 ", priority=" + priority +
                 '}';
     }
+
+    public assignment(assignment assign){
+        this.day = assign.day;
+        this.courses = assign.courses;
+        this.category = assign.category;
+        this.priority = assign.priority;
+    }
+
+    public boolean equals(assignment assign){
+        return this.day.equals(assign.day) && this.courses.equals(courses) && this.category.equals(category)
+                && this.priority.equals(priority);
+    }
+
+    public int compareTo(assignment assign){
+        return this.day.compareTo(assign.day);
+    }
 }
+

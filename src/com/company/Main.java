@@ -41,7 +41,6 @@ public class Main {
         }
     }
 
-
     public static void main(String[] args) {
         System.out.println("\n\nHello, AssignmentsApp!\n");
 
@@ -133,8 +132,16 @@ public class Main {
         assignment assign2 = new assignment(DaysOfTheWeek.getADay(), CourseList.getACourse(), Category.getACategory(), random.nextInt(4));
         System.out.println("The random assignments are: \n" + assign1 + "\n" + assign2);
 
+        //copy assign1 to assign3
         assignment assign3 = assign1;
-        System.out.println("Copy of assignment 1" + assign3);
+        System.out.println("Copy of assignment 1: " + assign3);
+
+        //override equals method
+        System.out.println(" T/F is copy assign3 == to original assign1? : " + assign3.equals(assign1));
+
+        //overrride compareTo method
+        System.out.println("Compared assignments: " + assign1.compareTo(assign2));
+
     }
 
     private static String formattedDate(LocalDateTime date) {
