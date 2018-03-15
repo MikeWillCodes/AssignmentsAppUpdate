@@ -1,6 +1,9 @@
 package com.company;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -140,8 +143,29 @@ public class Main {
         System.out.println(" T/F is copy assign3 == to original assign1? : " + assign3.equals(assign1));
 
         //overrride compareTo method
-        System.out.println("Compared assignments: " + assign1.compareTo(assign2));
+        System.out.println("Compared assignments: " + comparedAssignments(assign1,assign2));
 
+        //Which of assign1, assign2, or assign3 is the earliest?
+        if (assign1.equals(earliestAssignment(assign1,assign2,assign3))) { System.out.println("assign1 is the earliest assignment."); }
+        else if (assign2.equals(earliestAssignment(assign1,assign2,assign3))) { System.out.println("assign2 is the earliest assignment."); }
+        else if (assign3.equals(earliestAssignment(assign1,assign2,assign3))) { System.out.println("assign3 is the earliest assignment."); }
+
+
+    }
+
+    private static assignment earliestAssignment (assignment ... assignments){
+        assignment earliest = new assignment(assignments[0]);
+        for (assignment assign: assignments) {
+            if (earliest.getDay().compareTo(assignment.getDay()) > 0){ earliest = new assignment(assign); }
+        }
+        return earliest;
+    }
+
+    private static String comparedAssignments (assignment assign1, assignment assign2) {
+        int value = assign1.compareTo(assign2);
+        if (value < 0) { return "BEFORE"; }
+        else if (value > 0) { return "AFTER"; }
+        else { return "EQUALS"; }
     }
 
     private static String formattedDate(LocalDateTime date) {

@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class assignment {
 
-    public Main.DaysOfTheWeek day;
+    public static Main.DaysOfTheWeek day;
     public Main.CourseList courses;
     public Main.Category category;
     public Integer priority;
@@ -17,7 +17,7 @@ public class assignment {
         this.priority = priority;
     }
 
-    public Main.DaysOfTheWeek getDay() {
+    public static Main.DaysOfTheWeek getDay() {
         return day;
     }
 
