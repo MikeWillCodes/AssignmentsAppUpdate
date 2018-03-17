@@ -1,6 +1,7 @@
 package com.company;
 
 
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -15,33 +16,33 @@ public class Main {
     public enum DaysOfTheWeek {
         MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
 
-        private static final List<DaysOfTheWeek> DAYS_OF_THE_WEEK_LIST = List.of(values());
+        private static final List<DaysOfTheWeek> daysOfTheWeeks = List.of(values());
 
         public static DaysOfTheWeek getADay() {
-            return DAYS_OF_THE_WEEK_LIST.get(random.nextInt(DAYS_OF_THE_WEEK_LIST.size()));
+            return daysOfTheWeeks.get(random.nextInt(daysOfTheWeeks.size()));
         }
     }
 
     public enum CourseList {
         DATA_STRUCTURES, LINEAR_ALGEBRA, AFRICAN_AMERICAN_DISPORA_STUDIES, THEOLOGY, INTERCULTURAL_COMMUNICATIONS;
 
-        private static final List<CourseList> COURSE_LISTS = List.of(values());
+        private static final List<CourseList> courseLists = List.of(values());
 
         public static CourseList getACourse() {
-            return COURSE_LISTS.get(random.nextInt(COURSE_LISTS.size()));
+            return courseLists.get(random.nextInt(courseLists.size()));
         }
     }
 
     public enum Category {
         QUIZZES, TEST, HOMEWORK, NOTES, PROJECT;
-        private static final List<Category> CATEGORY_LIST = List.of(values());
+        private static final List<Category> categories = List.of(values());
 
         public static Category getACategory() {
-            return CATEGORY_LIST.get(random.nextInt(CATEGORY_LIST.size()));
+            return categories.get(random.nextInt(categories.size()));
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("\n\nHello, AssignmentsApp!\n");
 
         //Output the current date-time.
@@ -137,18 +138,35 @@ public class Main {
         System.out.println("Copy of assignment 1: " + assign3);
 
         //override equals method
-        System.out.println(" T/F is copy assign3 == to original assign1? : " + assign3.equals(assign1));
+        System.out.println("T/F Is copy assign3 == to original assign1? : " + assign3.equals(assign1));
 
         //overrride compareTo method
         System.out.println("Compared assignments: " + comparedAssignments(assign1,assign2));
 
         //Which of assign1, assign2, or assign3 is the earliest?
-        if (assign1.equals(earliestAssignment(assign1,assign2,assign3))) { System.out.println("assign1 is the earliest assignment."); }
-        else if (assign2.equals(earliestAssignment(assign1,assign2,assign3))) { System.out.println("assign2 is the earliest assignment."); }
-        else if (assign3.equals(earliestAssignment(assign1,assign2,assign3))) { System.out.println("assign3 is the earliest assignment."); }
+        if (assign1.equals(earliestAssignment(assign1,assign2,assign3))) { System.out.println("Assign1 is the earliest assignment."); }
+        else if (assign2.equals(earliestAssignment(assign1,assign2,assign3))) { System.out.println("Assign2 is the earliest assignment."); }
+        else if (assign3.equals(earliestAssignment(assign1,assign2,assign3))) { System.out.println("Assign3 is the earliest assignment."); }
 
-
+        // Write [x] randomly generated assignments to the file
+        writeToFile("input.dat", 3);
     }
+
+    private static assignment randomAssignments(){
+        return new assignment(DaysOfTheWeek.getADay(),CourseList.getACourse(),Category.getACategory(), random.nextInt(3)+1);
+    }
+
+    private static void writeToFile (String file, int numOfAssignments){
+       File outfile = new File(file);
+       int num = numOfAssignments;
+        try {
+            PrintWriter pw = new PrintWriter(outfile);
+            pw.println(randomAssignments());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private static assignment earliestAssignment (assignment ... assignments){
         assignment earliest = new assignment(assignments[0]);
