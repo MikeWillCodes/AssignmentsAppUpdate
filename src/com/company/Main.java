@@ -149,7 +149,7 @@ public class Main {
         else if (assign3.equals(earliestAssignment(assign1,assign2,assign3))) { System.out.println("Assign3 is the earliest assignment."); }
 
         // Write [x] randomly generated assignments to the file
-        writeToFile("input.dat", 3);
+        writeToFile("input.txt", 3);
     }
 
     private static assignment randomAssignments(){
@@ -159,9 +159,13 @@ public class Main {
     private static void writeToFile (String file, int numOfAssignments){
        File outfile = new File(file);
        int num = numOfAssignments;
-        try {
-            PrintWriter pw = new PrintWriter(outfile);
-            pw.println(randomAssignments());
+        try (PrintWriter pw = new PrintWriter(outfile))
+        {
+
+            while (num != 0) {
+                pw.println(randomAssignments());
+                num--;
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
