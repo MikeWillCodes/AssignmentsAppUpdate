@@ -150,6 +150,20 @@ public class Main {
 
         // Write [x] randomly generated assignments to the file
         writeToFile("input.txt", 3);
+
+        // Read assignments from file
+        randomAssignments();
+
+        // Remove any duplicate assignments
+        removeDuplicates();
+
+    }
+
+    private static Set<assignment> removeDuplicates(){
+        Set<assignment> assignmentSet = new HashSet<>();
+        assignmentSet.add(randomAssignments());
+
+        return assignmentSet;
     }
 
     private static assignment randomAssignments(){
