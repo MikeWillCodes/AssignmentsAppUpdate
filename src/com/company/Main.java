@@ -153,7 +153,7 @@ public class Main {
     }
 
     private static assignment randomAssignments(){
-        return new assignment(DaysOfTheWeek.getADay(),CourseList.getACourse(),Category.getACategory(), random.nextInt(3)+1);
+        return new assignment(DaysOfTheWeek.getADay(),CourseList.getACourse(),Category.getACategory(), random.nextInt(4));
     }
 
     private static void writeToFile (String file, int numOfAssignments){
@@ -161,7 +161,6 @@ public class Main {
        int num = numOfAssignments;
         try (PrintWriter pw = new PrintWriter(outfile))
         {
-
             while (num != 0) {
                 pw.println(randomAssignments());
                 num--;
